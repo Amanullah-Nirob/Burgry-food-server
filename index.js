@@ -154,7 +154,7 @@ app.post('/init', async(req, res) => {
       currency: 'BDT',
       tran_id: uuidv4(),
       status:'pending',
-      success_url: 'http://localhost:5000/success',
+      success_url: 'https://burgry-food.web.app/success',
       fail_url: 'http://localhost:5000/fail',
       cancel_url: 'http://localhost:5000/cancel',
       ipn_url: 'http://localhost:5000/ipn',
@@ -216,19 +216,19 @@ app.post('/init', async(req, res) => {
       },
     };
     const result=await Payment.updateOne(query,updateDoc,options)
-      res.status(200).redirect('http://localhost:3000/success')
+      res.status(200).redirect('https://burgry-food.web.app/success')
     })
 
 
     app.post(`/fail`,async(req,res)=>{
       const query={tran_id:req.body.tran_id}
       const order=await Payment.deleteOne(query)
-      res.status(400).redirect('http://localhost:3000/')
+      res.status(400).redirect('https://burgry-food.web.app/')
     })
     app.post(`/cancel`,async(req,res)=>{
       const query={tran_id:req.body.tran_id}
       const order=await Payment.deleteOne(query)
-      res.status(200).redirect('http://localhost:3000/')
+      res.status(200).redirect('https://burgry-food.web.app/')
     })
 
 
