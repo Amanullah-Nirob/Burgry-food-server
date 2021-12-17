@@ -1,7 +1,7 @@
 # Burgry Foods (Food Order Restaurant)
 
- ## [Burgry Food Live Site](https://burgry-food.web.app/).
- ## [Burgry Food Client Site code](https://github.com/nirub-khan/burgry-foods).
+ ### [Burgry Food Live Site](https://burgry-food.web.app/).
+ ### [Burgry Food Client Site code](https://github.com/nirub-khan/burgry-foods).
 
 ## Site Overview
 * Food restaurant Site with all facilities.
