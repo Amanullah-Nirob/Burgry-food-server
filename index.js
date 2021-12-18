@@ -7,11 +7,13 @@ const app = express()
 const port = process.env.PORT || 5000
 const SSLCommerzPayment = require('sslcommerz')
 const { v4: uuidv4 } = require('uuid');
+const fileUpload=require('express-fileupload')
 
 
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(fileUpload())
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.amixw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -106,11 +108,32 @@ async function run() {
          res.json(result)
      })
 
+
+
     app.post(`/reviews`,async(req,res)=>{
-      const newReview=req.body
-      const result=await Reviews.insertOne(newReview)
-      res.json(result)
+
+      const name=req.body.name
+      const title=req.body.title
+      const dis=req.body.dis
+       const pic=req.files.img
+        const picData=pic.data
+       const encodePic=picData.toString('base64')
+      const imgBuffer=Buffer.from(encodePic,'base64')
+      const newReview={
+        img:imgBuffer,
+        name,
+        title,
+        dis,
+      }
+        const result=await Reviews.insertOne(newReview)
+        res.json(result)
     })
+
+
+
+
+
+
 
      app.post(`/User`,async(req,res)=>{
        const newUser=req.body;
